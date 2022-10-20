@@ -6,10 +6,10 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nome')
-      table.string('descricao')
-      table.string('cnpj')
-      table.string('tamanho')
+      table.string('nome', 50).notNullable()
+      table.string('descricao', 100)
+      table.string('cnpj', 11).notNullable()
+      table.string('tamanho', 50)
       table.integer('id_lote').unsigned().references('id').inTable('lotes').notNullable()
 
       /**
