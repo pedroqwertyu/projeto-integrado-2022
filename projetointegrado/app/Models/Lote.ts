@@ -12,7 +12,7 @@ export default class Lote extends BaseModel {
   public valor: string
 
   @column()
-  public dataContrato: Date
+  public contrato: Date
 
   @column()
   public idLoteTipo: number

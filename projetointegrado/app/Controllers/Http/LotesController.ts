@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Lote from "App/Models/Lote"
+import LoteValidator from "App/Validators/LoteValidator"
 
 export default class LotesController {
     index(){
@@ -9,9 +10,9 @@ export default class LotesController {
 
     }
 
-    store({request}){
+    async store({request}){
 
-        const dados = request.only(['area', 'valor', 'dataContrato', 'idLoteTipo'])
+        const dados = await request.validate(LoteValidator)
 
         return Lote.create(dados)
         
@@ -37,7 +38,7 @@ export default class LotesController {
     async update({request}){
 
         const id = request.param('id')
-        const dados = request.only(['area', 'valor', 'dataContrato', 'idLoteTipo'])
+        const dados = await request.validate(LoteValidator)
         const lote = await Lote.findOrFail(id)
 
         lote.merge(dados)
