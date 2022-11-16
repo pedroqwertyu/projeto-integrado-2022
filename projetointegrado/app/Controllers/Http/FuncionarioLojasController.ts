@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import FuncionarioLoja from "App/Models/FuncionarioLoja"
+import FuncionarioLojaValidator from "App/Validators/FuncionarioLojaValidator"
 
 export default class FuncionarioLojasController {
     index(){
@@ -11,7 +12,7 @@ export default class FuncionarioLojasController {
 
     store({request}){
 
-        const dados = request.only(['idFuncionario', 'idLoja'])
+        const dados = request.validate(FuncionarioLojaValidator)
 
         return FuncionarioLoja.create(dados)
         
@@ -37,7 +38,7 @@ export default class FuncionarioLojasController {
     async update({request}){
 
         const id = request.param('id')
-        const dados = request.only(['idFuncionario', 'idLoja'])
+        const dados = await request.validate(FuncionarioLojaValidator)
         const funcionarioLoja = await FuncionarioLoja.findOrFail(id)
 
         funcionarioLoja.merge(dados)

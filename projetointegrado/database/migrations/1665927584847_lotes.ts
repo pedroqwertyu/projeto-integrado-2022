@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('area', 50).notNullable()
       table.string('valor', 50).notNullable()
-      table.date('data_contrato')
+      table.date('contrato')
       table.integer('id_lote_tipo').unsigned().references('id').inTable('lote_tipos').notNullable()
 
       /**
