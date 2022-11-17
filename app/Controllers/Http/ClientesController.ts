@@ -30,7 +30,7 @@ export default class ClientesController {
             clientes.where('desconto', 'like', '%' + desconto + '%')
         }
 
-        return Cliente.all()
+        return clientes
 
     }
 

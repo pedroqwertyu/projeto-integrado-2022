@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Loja from './Loja'
+import { BaseModel, column, } from '@ioc:Adonis/Lucid/Orm'
+
 
 export default class LoteTipo extends BaseModel {
   @column({ isPrimary: true })
@@ -18,6 +18,4 @@ export default class LoteTipo extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Loja)
-  public loja: HasMany<typeof Loja>
 }

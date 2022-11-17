@@ -22,5 +22,5 @@ export default class Preco extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Estacionamento)
-  public estacionamento: HasMany<typeof Estacionamento>
+  public estacionamentos: HasMany<typeof Estacionamento>
 }
