@@ -4,9 +4,51 @@ import Loja from "App/Models/Loja"
 import LojaValidator from "App/Validators/LojaValidator"
 
 export default class LojasController {
-    index(){
+    async index({ request }) {
 
-        return Loja.all()
+        const id = request.param('id')
+        const {
+            nome,
+            descricao,
+            cnpj,
+            tamanho,
+            idLote
+        } = await request.validate(LojaValidator)
+
+        const lojas = Loja.query().preload('lote').select(
+            'id',
+            'nome',
+            'descricao',
+            'cnpj',
+            'tamanho',
+            'idLote'
+        )
+
+        if (id) {
+            lojas.where('id', id)
+        }
+
+        if (nome) {
+            lojas.where('nome', nome)
+        }
+
+        if (descricao) {
+            lojas.where('descricao', 'like', '%' + descricao + '%')
+        }
+
+        if (cnpj) {
+            lojas.where('cpnj', 'like', cnpj + '%')
+        }
+
+        if (tamanho) {
+            lojas.where('tamanho', 'like', '%' + tamanho + '%')
+        }
+
+        if (idLote) {
+            lojas.where('idLote', 'like', '%' + idLote + '%')
+        }
+
+        return lojas
 
     }
 

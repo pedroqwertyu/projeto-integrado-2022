@@ -19,5 +19,5 @@ export default class Cliente extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Pessoa)
-  public pessoas: BelongsTo<typeof Pessoa>
+  public pessoa: BelongsTo<typeof Pessoa>
 }

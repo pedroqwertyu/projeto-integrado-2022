@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Pessoa from './Pessoa'
 
 export default class Veiculo extends BaseModel {
@@ -25,8 +25,8 @@ export default class Veiculo extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Veiculo)
-  public veiculo: HasMany<typeof Veiculo>
+  public veiculos: HasMany<typeof Veiculo>
 
-  @hasOne(() => Pessoa)
-  public pessoa: HasOne<typeof Pessoa>
+  @belongsTo(() => Pessoa)
+  public pessoa: BelongsTo<typeof Pessoa>
 }

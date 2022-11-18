@@ -26,8 +26,8 @@ export default class Lote extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Loja)
-  public loja: BelongsTo<typeof Loja>
+  public loja : BelongsTo<typeof Loja>
 
   @manyToMany(() => LoteTipo, { pivotTable: 'lote_tipos' })
-  public lotetipo: ManyToMany<typeof LoteTipo>
+  public loteTipos: ManyToMany<typeof LoteTipo>
 }

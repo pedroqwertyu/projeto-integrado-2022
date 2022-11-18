@@ -4,9 +4,51 @@ import Lote from "App/Models/Lote"
 import LoteValidator from "App/Validators/LoteValidator"
 
 export default class LotesController {
-    index(){
+    async index({ request }) {
 
-        return Lote.all()
+        const id = request.param('id')
+        const {
+            nome,
+            descricao,
+            cnpj,
+            tamanho,
+            idLote
+        } = await request.validate(LoteValidator)
+
+        const Lotes = Lote.query().preload('loteTipos').select(
+            'id',
+            'nome',
+            'descricao',
+            'cnpj',
+            'tamanho',
+            'idLote'
+        )
+
+        if (id) {
+            Lotes.where('id', id)
+        }
+
+        if (nome) {
+            Lotes.where('nome', nome)
+        }
+
+        if (descricao) {
+            Lotes.where('descricao', 'like', '%' + descricao + '%')
+        }
+
+        if (cnpj) {
+            Lotes.where('cpnj', 'like', cnpj + '%')
+        }
+
+        if (tamanho) {
+            Lotes.where('tamanho', 'like', '%' + tamanho + '%')
+        }
+
+        if (idLote) {
+            Lotes.where('idLote', 'like', '%' + idLote + '%')
+        }
+
+        return Lotes
 
     }
 
