@@ -4,9 +4,39 @@ import Funcionario from "App/Models/Funcionario"
 import FuncionarioValidator from "App/Validators/FuncionarioValidator"
 
 export default class FuncionariosController {
-    index(){
+    async index({request}){
 
-        return Funcionario.all()
+        const id = request.param('id')
+        const {
+            idPessoa,
+            matricula,
+            salario
+        } = await request.validate(FuncionarioValidator)
+
+        const funcionarios = Funcionario.query().preload('pessoa').select(
+            'id',
+            'idPessoa',
+            'matricula',
+            'salario'
+        )
+
+        if (id) {
+            funcionarios.where('id', id)
+        }
+
+        if (idPessoa) {
+            funcionarios.where('idPessoa', idPessoa)
+        }
+
+        if (matricula) {
+            funcionarios.where('matricula', 'like', matricula + '%')
+        }
+
+        if (salario) {
+            funcionarios.where('salario', 'like', '%' + salario + '%')
+        }
+
+        return funcionarios
 
     }
 

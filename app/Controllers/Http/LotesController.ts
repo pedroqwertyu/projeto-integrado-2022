@@ -8,47 +8,41 @@ export default class LotesController {
 
         const id = request.param('id')
         const {
-            nome,
-            descricao,
-            cnpj,
-            tamanho,
-            idLote
+            area,
+            valor,
+            contrato,
+            idLoteTipo,
         } = await request.validate(LoteValidator)
 
-        const Lotes = Lote.query().preload('loteTipos').select(
+        const lotes = Lote.query().preload('loteTipo').select(
             'id',
-            'nome',
-            'descricao',
-            'cnpj',
-            'tamanho',
-            'idLote'
+            'area',
+            'valor',
+            'contrato',
+            'idLoteTipo'
         )
 
         if (id) {
-            Lotes.where('id', id)
+            lotes.where('id', id)
         }
 
-        if (nome) {
-            Lotes.where('nome', nome)
+        if (area) {
+            lotes.where('area', 'like', '%' + area + '%')
         }
 
-        if (descricao) {
-            Lotes.where('descricao', 'like', '%' + descricao + '%')
+        if (valor) {
+            lotes.where('valor', 'like', '%' + valor + '%')
         }
 
-        if (cnpj) {
-            Lotes.where('cpnj', 'like', cnpj + '%')
+        if (contrato) {
+            lotes.where('cpnj', 'like', '%' + contrato + '%')
         }
 
-        if (tamanho) {
-            Lotes.where('tamanho', 'like', '%' + tamanho + '%')
+        if (idLoteTipo) {
+            lotes.where('idLoteTipo', idLoteTipo)
         }
 
-        if (idLote) {
-            Lotes.where('idLote', 'like', '%' + idLote + '%')
-        }
-
-        return Lotes
+        return lotes
 
     }
 

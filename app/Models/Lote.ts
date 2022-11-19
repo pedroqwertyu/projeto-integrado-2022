@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
-import Loja from './Loja'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import LoteTipo from './LoteTipo'
+import Loja from './Loja'
 
 export default class Lote extends BaseModel {
   @column({ isPrimary: true })
@@ -25,9 +25,9 @@ export default class Lote extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Loja)
-  public loja : BelongsTo<typeof Loja>
+  @belongsTo(() => LoteTipo)
+  public loteTipo : BelongsTo<typeof LoteTipo>
 
-  @manyToMany(() => LoteTipo, { pivotTable: 'lote_tipos' })
-  public loteTipos: ManyToMany<typeof LoteTipo>
+  @hasMany(() => Loja)
+  public lojas: HasMany<typeof Loja>
 }

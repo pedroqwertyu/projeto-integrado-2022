@@ -12,7 +12,7 @@ export default class ClientesController {
             desconto
         } = await request.validate(ClienteValidator)
 
-        const clientes = Cliente.query().preload('pessoas').select(
+        const clientes = Cliente.query().preload('pessoa').select(
             'id',
             'idPessoa',
             'desconto'
