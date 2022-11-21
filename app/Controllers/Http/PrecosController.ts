@@ -1,11 +1,38 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Preco from "App/Models/Preco"
+import PrecoValidator from "App/Validators/PrecoValidator"
 
 export default class PrecosController {
-    
-    index() {
-        return Preco.all()
+
+    async index({ request }) {
+        const id = request.param('id')
+        const {
+            descricao,
+            unidade,
+            valor
+        } = await request.validate(PrecoValidator)
+
+        const precos = Preco.query().preload('estacionamentos').select(
+            'id',
+            'decricao',
+            'unidade',
+            'valor'
+        )
+
+        if (id) {
+            precos.where('id', id)
+        }
+        if (descricao) {
+            precos.where('descricao', descricao)
+        }
+        if (unidade) {
+            precos.where('unidade', unidade)
+        }
+        if (valor) {
+            precos.where('valor', valor)
+        }
+        return precos
     }
 
     store({ request }) {
