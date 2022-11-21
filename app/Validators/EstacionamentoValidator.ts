@@ -6,7 +6,7 @@ export default class EstacionamentoValidator {
 
   public schema = schema.create({
     idVeiculo: schema.number([
-      rules.exists({ table: 'veiculos', column: 'idVeiculo' })
+      rules.exists({ table: 'estacionamentos', column: 'idVeiculo' })
     ]),
     dateInicio: schema.date.optional({
       format: 'dd-MM-yyyy'
@@ -15,7 +15,7 @@ export default class EstacionamentoValidator {
       format: 'dd-MM-yyyy'
     }),
     idPreco: schema.number([
-      rules.exists({ table: 'precos', column: 'idPreco' })
+      rules.exists({ table: 'estacionamentos', column: 'idPreco' })
     ])
   })
 
