@@ -4,10 +4,33 @@ import LoteTipo from "App/Models/LoteTipo"
 import LoteTipoValidator from "App/Validators/LoteTipoValidator"
 
 export default class LoteTiposController {
-    index(){
+    async index({request}){
 
-        return LoteTipo.all()
+        const id = request.param('id')
+        const {
+            tipo,
+            descricao
+        } = await request.validate(LoteTipoValidator)
 
+        const loteTipos = LoteTipo.query().preload('lotes').select(
+            'id',
+            'tipo',
+            'descricao'
+        )
+
+        if (id) {
+            loteTipos.where('id', id)
+        }
+
+        if (tipo) {
+            loteTipos.where('tipo', 'like', '%' +  tipo + '%')
+        }
+
+        if (descricao) {
+            loteTipos.where('descricao', 'like', '%' + descricao + '%')
+        }
+
+        return loteTipos
     }
 
     async store({request}){
