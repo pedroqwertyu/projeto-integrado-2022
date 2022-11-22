@@ -5,58 +5,61 @@ import PessoaValidator from "App/Validators/PessoaValidator";
 
 export default class PessoasController {
 
-    async index({ request }) {
-        const id = request.param('id')
-        const {
-            nome,
-            cpf,
-            email,
-            telefone,
-            endereco,
-            tipo
-        } = await request.validate(PessoaValidator)
+    // async index({ request }) {
+    //     const id = request.param('id')
+    //     const {
+    //         nome,
+    //         cpf,
+    //         email,
+    //         telefone,
+    //         endereco,
+    //         tipo
+    //     } = await request.validate(PessoaValidator)
 
-        const pessoas = Pessoa.query().preload('cliente').select(
-            'id',
-            'nome',
-            'cpf',
-            'email',
-            'telefone',
-            'endereco',
-            'tipo'
-        )
+    //     const pessoas = Pessoa.query().preload('cliente').select(
+    //         'id',
+    //         'nome',
+    //         'cpf',
+    //         'email',
+    //         'telefone',
+    //         'endereco',
+    //         'tipo'
+    //     )
 
-        if (id) {
-            pessoas.where('id', id)
-        }
+    //     if (id) {
+    //         pessoas.where('id', id)
+    //     }
 
-        if (nome) {
-            pessoas.where('nome', nome)
-        }
-        if (cpf) {
-            pessoas.where('cpf', cpf)
-        }
-        if (email) {
-            pessoas.where('email', email)
-        }
+    //     if (nome) {
+    //         pessoas.where('nome', nome)
+    //     }
+    //     if (cpf) {
+    //         pessoas.where('cpf', cpf)
+    //     }
+    //     if (email) {
+    //         pessoas.where('email', email)
+    //     }
 
-        if (telefone) {
-            pessoas.where('telefone', telefone)
-        }
+    //     if (telefone) {
+    //         pessoas.where('telefone', telefone)
+    //     }
 
-        if (endereco) {
-            pessoas.where('endereco', endereco)
-        }
+    //     if (endereco) {
+    //         pessoas.where('endereco', endereco)
+    //     }
 
-        if (tipo) {
-            pessoas.where('tipo', tipo)
-        }
+    //     if (tipo) {
+    //         pessoas.where('tipo', tipo)
+    //     }
 
-        return pessoas
+    //     return pessoas
+    // }
+    index(){
+        return Pessoa.query()
     }
 
     store({ request }) {
-        const dados = request.only(['descricao', 'unidade', 'valor'])
+        const dados = request.validate(PessoaValidator)
         return Pessoa.create(dados)
     }
 
@@ -75,7 +78,7 @@ export default class PessoasController {
         const id = request.param('id')
         const pessoa = await Pessoa.findOrFail(id)
 
-        const dados = request.only(['descricao', 'unidade', 'valor'])
+        const dados = await request.validate(PessoaValidator)
 
         pessoa.merge(dados)
         return pessoa.save()

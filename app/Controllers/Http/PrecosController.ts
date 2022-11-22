@@ -5,38 +5,41 @@ import PrecoValidator from "App/Validators/PrecoValidator"
 
 export default class PrecosController {
 
-    async index({ request }) {
-        const id = request.param('id')
-        const {
-            descricao,
-            unidade,
-            valor
-        } = await request.validate(PrecoValidator)
+    // async index({ request }) {
+    //     const id = request.param('id')
+    //     const {
+    //         descricao,
+    //         unidade,
+    //         valor
+    //     } = await request.validate(PrecoValidator)
 
-        const precos = Preco.query().preload('estacionamentos').select(
-            'id',
-            'decricao',
-            'unidade',
-            'valor'
-        )
+    //     const precos = Preco.query().preload('estacionamentos').select(
+    //         'id',
+    //         'decricao',
+    //         'unidade',
+    //         'valor'
+    //     )
 
-        if (id) {
-            precos.where('id', id)
-        }
-        if (descricao) {
-            precos.where('descricao', descricao)
-        }
-        if (unidade) {
-            precos.where('unidade', unidade)
-        }
-        if (valor) {
-            precos.where('valor', valor)
-        }
-        return precos
+    //     if (id) {
+    //         precos.where('id', id)
+    //     }
+    //     if (descricao) {
+    //         precos.where('descricao', descricao)
+    //     }
+    //     if (unidade) {
+    //         precos.where('unidade', unidade)
+    //     }
+    //     if (valor) {
+    //         precos.where('valor', valor)
+    //     }
+    //     return precos
+    // }
+    index(){
+        return Preco.query()
     }
 
     store({ request }) {
-        const dados = request.only(['nome', 'cpf', 'email', 'telefone', 'endereco', 'tipo'])
+        const dados = request.validate(PrecoValidator)
         return Preco.create(dados)
     }
 
@@ -55,7 +58,7 @@ export default class PrecosController {
         const id = request.param('id')
         const preco = await Preco.findOrFail(id)
 
-        const dados = request.only(['nome', 'cpf', 'email', 'telefone', 'endereco', 'tipo'])
+        const dados = await request.validate(PrecoValidator)
 
         preco.merge(dados)
         return preco.save()

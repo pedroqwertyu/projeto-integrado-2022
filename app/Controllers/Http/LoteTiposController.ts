@@ -4,33 +4,37 @@ import LoteTipo from "App/Models/LoteTipo"
 import LoteTipoValidator from "App/Validators/LoteTipoValidator"
 
 export default class LoteTiposController {
-    async index({request}){
+    // async index({request}){
 
-        const id = request.param('id')
-        const {
-            tipo,
-            descricao
-        } = await request.validate(LoteTipoValidator)
+    //     const id = request.param('id')
+    //     const {
+    //         tipo,
+    //         descricao
+    //     } = await request.validate(LoteTipoValidator)
 
-        const loteTipos = LoteTipo.query().preload('lotes').select(
-            'id',
-            'tipo',
-            'descricao'
-        )
+    //     const loteTipos = LoteTipo.query().preload('lotes').select(
+    //         'id',
+    //         'tipo',
+    //         'descricao'
+    //     )
 
-        if (id) {
-            loteTipos.where('id', id)
-        }
+    //     if (id) {
+    //         loteTipos.where('id', id)
+    //     }
 
-        if (tipo) {
-            loteTipos.where('tipo', 'like', '%' +  tipo + '%')
-        }
+    //     if (tipo) {
+    //         loteTipos.where('tipo', 'like', '%' +  tipo + '%')
+    //     }
 
-        if (descricao) {
-            loteTipos.where('descricao', 'like', '%' + descricao + '%')
-        }
+    //     if (descricao) {
+    //         loteTipos.where('descricao', 'like', '%' + descricao + '%')
+    //     }
 
-        return loteTipos
+    //     return loteTipos
+    // }
+
+    index(){
+        return LoteTipo.query()
     }
 
     async store({request}){
