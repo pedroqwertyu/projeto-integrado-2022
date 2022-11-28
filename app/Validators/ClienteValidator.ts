@@ -6,7 +6,7 @@ export default class ClienteValidator {
 
   public schema = schema.create({
     idPessoa: schema.number([
-      rules.exists({ table: 'pessoas', column: 'idPessoa' })
+      rules.exists({ table: 'pessoas', column: 'id' })
     ]),
     desconto: schema.string([
       rules.alphaNum()

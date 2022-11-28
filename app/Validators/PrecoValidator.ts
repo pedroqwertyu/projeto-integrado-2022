@@ -6,7 +6,7 @@ export default class PrecoValidator {
 
 
   public schema = schema.create({
-    descicao: schema.string([
+    descricao: schema.string([
       rules.maxLength(100)
     ]),
     unidade: schema.number.optional(),

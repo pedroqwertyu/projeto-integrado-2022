@@ -4,62 +4,12 @@ import Pessoa from "App/Models/Pessoa";
 import PessoaValidator from "App/Validators/PessoaValidator";
 
 export default class PessoasController {
-
-    // async index({ request }) {
-    //     const id = request.param('id')
-    //     const {
-    //         nome,
-    //         cpf,
-    //         email,
-    //         telefone,
-    //         endereco,
-    //         tipo
-    //     } = await request.validate(PessoaValidator)
-
-    //     const pessoas = Pessoa.query().preload('cliente').select(
-    //         'id',
-    //         'nome',
-    //         'cpf',
-    //         'email',
-    //         'telefone',
-    //         'endereco',
-    //         'tipo'
-    //     )
-
-    //     if (id) {
-    //         pessoas.where('id', id)
-    //     }
-
-    //     if (nome) {
-    //         pessoas.where('nome', nome)
-    //     }
-    //     if (cpf) {
-    //         pessoas.where('cpf', cpf)
-    //     }
-    //     if (email) {
-    //         pessoas.where('email', email)
-    //     }
-
-    //     if (telefone) {
-    //         pessoas.where('telefone', telefone)
-    //     }
-
-    //     if (endereco) {
-    //         pessoas.where('endereco', endereco)
-    //     }
-
-    //     if (tipo) {
-    //         pessoas.where('tipo', tipo)
-    //     }
-
-    //     return pessoas
-    // }
     index(){
-        return Pessoa.query()
+        return Pessoa.query().preload('clientes').preload('funcionarios').preload('veiculos')
     }
 
-    store({ request }) {
-        const dados = request.validate(PessoaValidator)
+    async store({ request }) {
+        const dados = await request.validate(PessoaValidator)
         return Pessoa.create(dados)
     }
 

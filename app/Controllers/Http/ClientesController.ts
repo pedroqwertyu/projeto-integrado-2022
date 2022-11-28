@@ -4,39 +4,13 @@ import Cliente from "App/Models/Cliente"
 import ClienteValidator from "App/Validators/ClienteValidator"
 
 export default class ClientesController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const {
-            idPessoa,
-            desconto
-        } = await request.validate(ClienteValidator)
-
-        const clientes = Cliente.query().preload('pessoa').select(
-            'id',
-            'idPessoa',
-            'desconto'
-        )
-
-        if (id) {
-            clientes.where('id', id)
-        }
-
-        if (idPessoa) {
-            clientes.where('idPessoa', idPessoa)
-        }
-
-        if (desconto) {
-            clientes.where('desconto', 'like', '%' + desconto + '%')
-        }
-
-        return clientes
-
+    index() {
+        return Cliente.query().preload('pessoa')
     }
 
-    store({ request }) {
+    async store({ request }) {
 
-        const dados = request.only(['idPessoa', 'desconto'])
+        const dados = await request.validate(ClienteValidator)
 
         return Cliente.create(dados)
 
@@ -62,7 +36,7 @@ export default class ClientesController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = request.only(['idPessoa', 'desconto'])
+        const dados = request.validate(ClienteValidator)
         const cliente = await Cliente.findOrFail(id)
 
         cliente.merge(dados)

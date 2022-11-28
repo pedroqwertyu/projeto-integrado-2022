@@ -13,7 +13,7 @@ export default class LojaValidator {
       rules.maxLength(100)
     ]),
     cnpj: schema.string([
-      rules.regex(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/),
+      rules.regex(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/),
       rules.unique({table: 'lojas', column: 'cnpj'}),
       rules.minLength(14),
       rules.maxLength(14)
@@ -23,7 +23,7 @@ export default class LojaValidator {
       rules.maxLength(50)
     ]),
     idLote: schema.number([
-      rules.exists({table: 'lojas', column: 'id_lote'})
+      rules.exists({table: 'lojas', column: 'id'})
     ])
   })
 

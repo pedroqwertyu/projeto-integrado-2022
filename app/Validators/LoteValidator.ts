@@ -15,7 +15,7 @@ export default class LoteValidator {
     ]),
     contrato: schema.date.optional(),
     idLoteTipo: schema.number([
-      rules.exists({table: 'lotes', column: 'id_lote_tipo'})
+      rules.exists({table: 'lotes', column: 'id'})
     ])
   })
 

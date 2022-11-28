@@ -15,7 +15,7 @@ export default class VeiculoValidator {
       rules.maxLength(50)
     ]),
     idPessoa: schema.number([
-      rules.exists({ table: 'pessoas', column: 'idPessoa' })
+      rules.exists({ table: 'pessoas', column: 'id' })
     ])
   })
 

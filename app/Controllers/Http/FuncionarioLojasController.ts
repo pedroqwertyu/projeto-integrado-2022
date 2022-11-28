@@ -4,41 +4,13 @@ import FuncionarioLoja from "App/Models/FuncionarioLoja"
 import FuncionarioLojaValidator from "App/Validators/FuncionarioLojaValidator"
 
 export default class FuncionarioLojasController {
-    // async index({request}){
-
-    //     const id = request.param('id')
-    //     const {
-    //         idFuncionario,
-    //         idLoja
-    //     } = await request.all()
-
-    //     const funcionarioLojas = FuncionarioLoja.query().preload('funcionario').preload('loja').select(
-    //         'id',
-    //         'idFuncionario',
-    //         'idLoja'
-    //     )
-
-    //     if (id) {
-    //         funcionarioLojas.where('id', id)
-    //     }
-
-    //     if (idFuncionario) {
-    //         funcionarioLojas.where('idFuncionario', idFuncionario)
-    //     }
-
-    //     if (idLoja) {
-    //         funcionarioLojas.where('idLoja', idLoja)
-    //     }
-
-    //     return funcionarioLojas
-    // }
     index(){
-        return FuncionarioLoja.query()
+        return FuncionarioLoja.query().preload('funcionario').preload('loja')
     }
     
-    store({request}){
+    async store({request}){
 
-        const dados = request.validate(FuncionarioLojaValidator)
+        const dados = await request.validate(FuncionarioLojaValidator)
 
         return FuncionarioLoja.create(dados)
         

@@ -26,5 +26,5 @@ export default class Funcionario extends BaseModel {
   public pessoa: BelongsTo<typeof Pessoa>
 
   @manyToMany(() => Loja, { pivotTable: 'funcionario_lojas' })
-  public funcionarios: ManyToMany<typeof Loja>
+  public lojas: ManyToMany<typeof Loja>
 }

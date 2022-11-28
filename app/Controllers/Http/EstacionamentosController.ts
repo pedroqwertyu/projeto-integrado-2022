@@ -4,53 +4,13 @@ import Estacionamento from "App/Models/Estacionamento"
 import EstacionamentoValidator from "App/Validators/EstacionamentoValidator"
 
 export default class EstacionamentosController {
-    // async index({ request }) {
-    //     const id = request.param('id')
-    //     const {
-    //         idVeiculo,
-    //         date_inicio,
-    //         date_fim,
-    //         idPreco
-    //     } = await request.validate(EstacionamentoValidator)
-
-    //     const estacionamentos = Estacionamento.query().preload('veiculo').select(
-    //         'id',
-    //         'idVeiculo',
-    //         'date_inicio',
-    //         'date_fim',
-    //         'idPreco'
-    //     )
-
-    //     if (id) {
-    //         estacionamentos.where('id', id)
-    //     }
-
-    //     if (idVeiculo) {
-    //         estacionamentos.where('idVeiculo', idVeiculo)
-    //     }
-
-    //     if (date_inicio) {
-    //         estacionamentos.where('date_inicio', date_inicio)
-    //     }
-
-    //     if (date_fim) {
-    //         estacionamentos.where('date_fim', date_fim)
-    //     }
-
-    //     if (idPreco) {
-    //         estacionamentos.where('idPreco', idPreco)
-    //     }
-
-    //     return estacionamentos
-
-    // }
     index(){
-        return Estacionamento.query()
+        return Estacionamento.query().preload('preco').preload('veiculo')
     }
 
-    store({ request }) {
+    async store({ request }) {
 
-        const dados = request.validate(EstacionamentoValidator)
+        const dados = await request.validate(EstacionamentoValidator)
 
         return Estacionamento.create(dados)
 

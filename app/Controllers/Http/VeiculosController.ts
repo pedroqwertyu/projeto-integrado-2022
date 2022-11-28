@@ -4,53 +4,13 @@ import Veiculo from "App/Models/Veiculo"
 import VeiculoValidator from "App/Validators/VeiculoValidator"
 
 export default class VeiculosController {
-    // async index({ request }) {
-    //     const id = request.param('id')
-    //     const {
-    //         placa,
-    //         marca,
-    //         modelo,
-    //         idPessoa
-    //     } = await request.validate(VeiculoValidator)
-
-    //     const veiculos = Veiculo.query().preload('pessoa').select(
-    //         'id',
-    //         'placa',
-    //         'marca',
-    //         'modelo',
-    //         'idPessoa'
-    //     )
-
-    //     if (id) {
-    //         veiculos.where('id', id)
-    //     }
-
-    //     if (placa) {
-    //         veiculos.where('placa', placa)
-    //     }
-
-    //     if (marca) {
-    //         veiculos.where('marca', marca)
-    //     }
-
-    //     if (modelo) {
-    //         veiculos.where('modelo', modelo)
-    //     }
-
-    //     if (idPessoa) {
-    //         veiculos.where('idPessoa', idPessoa)
-    //     }
-
-    //     return veiculos
-
-    // }
     index(){
-        return Veiculo.query()
+        return Veiculo.query().preload('pessoa').preload('estacionamentos')
     }
 
-    store({ request }) {
+    async store({ request }) {
 
-        const dados = request.validate(VeiculoValidator)
+        const dados = await request.validate(VeiculoValidator)
 
         return Veiculo.create(dados)
 
