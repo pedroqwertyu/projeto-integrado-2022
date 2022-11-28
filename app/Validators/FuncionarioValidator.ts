@@ -6,7 +6,7 @@ export default class FuncionarioValidator {
 
   public schema = schema.create({
     pessoaId: schema.number([
-      rules.exists({table: 'funcionarios', column: 'id'})
+      rules.exists({table: 'pessoas', column: 'id'})
     ]),
     matricula: schema.number([
       rules.unique({table: 'funcionarios', column: 'matricula'})

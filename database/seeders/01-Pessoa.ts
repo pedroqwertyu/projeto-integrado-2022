@@ -6,7 +6,7 @@ export default class extends BaseSeeder {
     await Pessoa.createMany([
       {
         nome: 'Rodrigo Vale',
-        cpf: 943190,
+        cpf: '04254692303',
         email: 'rodrigovale170@gmail.com',
         telefone: 998672775,
         endereco: 'QNM 40 Conjunto P casa 12',

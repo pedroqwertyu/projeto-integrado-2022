@@ -12,7 +12,7 @@ export default class Pessoa extends BaseModel {
   public nome: string
 
   @column()
-  public cpf: number
+  public cpf: string
 
   @column()
   public email: string

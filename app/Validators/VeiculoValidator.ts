@@ -6,7 +6,7 @@ export default class VeiculoValidator {
 
   public schema = schema.create({
     placa: schema.string([
-      rules.maxLength(10)
+      rules.maxLength(8)
     ]),
     marca: schema.string.optional([
       rules.maxLength(50)
@@ -14,7 +14,7 @@ export default class VeiculoValidator {
     modelo: schema.string.optional([
       rules.maxLength(50)
     ]),
-    idPessoa: schema.number([
+    pessoaId: schema.number([
       rules.exists({ table: 'pessoas', column: 'id' })
     ])
   })

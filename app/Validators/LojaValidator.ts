@@ -6,7 +6,9 @@ export default class LojaValidator {
 
   public schema = schema.create({
     nome: schema.string([
-      rules.alpha(),
+      rules.alpha({
+        allow: ['space']
+      }),
       rules.maxLength(50)
     ]),
     descricao: schema.string.optional([
@@ -19,11 +21,10 @@ export default class LojaValidator {
       rules.maxLength(14)
     ]),
     tamanho: schema.string([
-      rules.alphaNum(),
       rules.maxLength(50)
     ]),
     loteId: schema.number([
-      rules.exists({table: 'lojas', column: 'id'})
+      rules.exists({table: 'lotes', column: 'id'})
     ])
   })
 
