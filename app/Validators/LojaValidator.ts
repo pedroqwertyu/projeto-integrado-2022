@@ -22,7 +22,7 @@ export default class LojaValidator {
       rules.alphaNum(),
       rules.maxLength(50)
     ]),
-    idLote: schema.number([
+    loteId: schema.number([
       rules.exists({table: 'lojas', column: 'id'})
     ])
   })

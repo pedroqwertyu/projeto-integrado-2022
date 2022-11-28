@@ -5,10 +5,10 @@ export default class extends BaseSeeder {
   public async run() {
     await Estacionamento.createMany([
       {
-        idVeiculo: 1,
-        dateInicio: new Date(2022, 15, 2),
-        dateFim: new Date(2022, 15, 3),
-        idPreco: 1
+        veiculoId: 1,
+        inicio: new Date(2022, 15, 2),
+        fim: new Date(2022, 15, 3),
+        precoId: 1
       }
     ])
   }

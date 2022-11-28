@@ -20,7 +20,7 @@ export default class Loja extends BaseModel {
   public tamanho: string
 
   @column()
-  public idLote: number
+  public loteId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

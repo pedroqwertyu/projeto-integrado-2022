@@ -14,7 +14,7 @@ export default class LoteValidator {
       rules.maxLength(50)
     ]),
     contrato: schema.date.optional(),
-    idLoteTipo: schema.number([
+    loteTipoId: schema.number([
       rules.exists({table: 'lotes', column: 'id'})
     ])
   })

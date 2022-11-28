@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
         descricao: 'Loja de artigos Esportivos',
         cnpj: '34803270913',
         tamanho: 'Loja grande',
-        idLote: 1
+        loteId: 1
       }
     ])
   }

@@ -8,10 +8,10 @@ export default class FuncionarioLoja extends BaseModel {
   public id: number
 
   @column()
-  public idFuncionario: number
+  public funcionarioId: number
 
   @column()
-  public idLoja: number
+  public lojaId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

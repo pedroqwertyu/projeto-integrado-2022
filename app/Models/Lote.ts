@@ -17,7 +17,7 @@ export default class Lote extends BaseModel {
   public contrato: Date
 
   @column()
-  public idLoteTipo: number
+  public loteTipoId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -5,7 +5,7 @@ export default class extends BaseSeeder {
   public async run () {
     await Cliente.createMany([
       {
-        idPessoa: 1,
+        pessoaId: 1,
         desconto: 15
       }
     ])

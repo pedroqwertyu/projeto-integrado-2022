@@ -6,10 +6,10 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('id_veiculo').unsigned().references('id').inTable('veiculos').notNullable()
-      table.date('date_inicio')
-      table.date('date_fim')
-      table.integer('id_preco').unsigned().references('id').inTable('precos').notNullable()
+      table.integer('veiculo_id').unsigned().references('id').inTable('veiculos').notNullable()
+      table.date('inicio')
+      table.date('fim')
+      table.integer('preco_id').unsigned().references('id').inTable('precos').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

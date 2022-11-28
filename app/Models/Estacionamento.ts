@@ -8,16 +8,16 @@ export default class Estacionamento extends BaseModel {
   public id: number
 
   @column()
-  public idVeiculo: number
+  public veiculoId: number
 
   @column()
-  public dateInicio: Date
+  public inicio: Date
 
   @column()
-  public dateFim: Date
+  public fim: Date
 
   @column()
-  public idPreco: number
+  public precoId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

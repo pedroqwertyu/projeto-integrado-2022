@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('descricao', 100)
       table.string('cnpj', 14).notNullable()
       table.string('tamanho', 50)
-      table.integer('id_lote').unsigned().references('id').inTable('lotes').notNullable()
+      table.integer('lote_id').unsigned().references('id').inTable('lotes').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

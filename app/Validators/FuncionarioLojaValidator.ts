@@ -5,10 +5,10 @@ export default class FuncionarioLojaValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    idFuncionario: schema.number([
+    funcionarioId: schema.number([
       rules.exists({table: 'funcionario_lojas', column: 'id'})
     ]),
-    idLoja: schema.number([
+    lojaId: schema.number([
       rules.exists({table: 'funcionario_lojas', column: 'id'})
     ]),
   })

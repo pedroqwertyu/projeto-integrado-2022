@@ -8,7 +8,7 @@ export default class extends BaseSeeder {
         area: '300m²',
         valor: 'R$10.000,00',
         contrato: new Date(2022,15,2),
-        idLoteTipo: 1
+        loteTipoId: 1
       }
     ])
   }

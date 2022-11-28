@@ -5,16 +5,16 @@ export default class EstacionamentoValidator {
   constructor(protected ctx: HttpContextContract) { }
 
   public schema = schema.create({
-    idVeiculo: schema.number([
+    veiculoId: schema.number([
       rules.exists({ table: 'estacionamentos', column: 'id' })
     ]),
-    dateInicio: schema.date.optional({
+    inicio: schema.date.optional({
       format: 'dd-MM-yyyy'
     }),
-    dateFim: schema.date.optional({
+    fim: schema.date.optional({
       format: 'dd-MM-yyyy'
     }),
-    idPreco: schema.number([
+    precoId: schema.number([
       rules.exists({ table: 'estacionamentos', column: 'id' })
     ])
   })

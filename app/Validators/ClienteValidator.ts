@@ -5,7 +5,7 @@ export default class ClienteValidator {
   constructor(protected ctx: HttpContextContract) { }
 
   public schema = schema.create({
-    idPessoa: schema.number([
+    pessoaId: schema.number([
       rules.exists({ table: 'pessoas', column: 'id' })
     ]),
     desconto: schema.string([

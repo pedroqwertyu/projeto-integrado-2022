@@ -8,7 +8,7 @@ export default class extends BaseSeeder {
         placa: 'JHH-3489',
         marca: 'Nissan',
         modelo: 'GT-R R34 2002',
-        idPessoa: 1
+        pessoaId: 1
       }
     ])
   }

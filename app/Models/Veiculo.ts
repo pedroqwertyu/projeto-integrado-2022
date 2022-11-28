@@ -17,7 +17,7 @@ export default class Veiculo extends BaseModel {
   public modelo: string
 
   @column()
-  public idPessoa: number
+  public pessoaId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

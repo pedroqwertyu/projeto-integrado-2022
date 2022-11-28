@@ -7,7 +7,7 @@ export default class Cliente extends BaseModel {
   public id: number
 
   @column()
-  public idPessoa: number
+  public pessoaId: number
 
   @column()
   public desconto: number

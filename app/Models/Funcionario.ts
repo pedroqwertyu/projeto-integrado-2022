@@ -8,7 +8,7 @@ export default class Funcionario extends BaseModel {
   public id: number
 
   @column()
-  public idPessoa: number
+  public pessoaId: number
 
   @column()
   public matricula: number
